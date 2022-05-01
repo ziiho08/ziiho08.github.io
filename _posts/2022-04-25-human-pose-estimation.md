@@ -2,8 +2,8 @@
 published : true
 layout: single
 title:  "Human Pose Estimation"
-categories : coding
-tag : [python, blog, jekyll]
+categories : Deep learning
+tag : [Deep learning]
 toc: true
 ---
 
