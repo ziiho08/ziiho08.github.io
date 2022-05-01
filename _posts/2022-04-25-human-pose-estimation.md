@@ -2,7 +2,7 @@
 published : true
 layout: single
 title:  "Human Pose Estimation"
-categories : Deep learning
+categories : [Deep learning]
 tag : [Deep learning]
 toc: true
 ---

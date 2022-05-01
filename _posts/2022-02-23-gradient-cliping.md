@@ -2,7 +2,7 @@
 published : true
 layout: single
 title:  "Gradient Cliping"
-categories : Deep learning
+categories : [Deep learning]
 tag : [python]
 toc: true
 ---
