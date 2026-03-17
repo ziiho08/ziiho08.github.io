@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications — Jiho Choi</title>
+  <meta name="description" content="Full publication list of Jiho Choi, PhD student at Jeonbuk National University." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #f2f8f2;
+      --bg2:       #e8f4e8;
+      --surface:   #ffffff;
+      --border:    #d4e8d4;
+      --text:      #1e2d1e;
+      --text-mid:  #3d5c3d;
+      --text-muted:#6b8c6b;
+      --accent:    #2d7a2d;
+      --accent2:   #4a9e4a;
+      --accent-lt: #eaf5ea;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(242,248,242,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 860px; margin: 0 auto; padding: 0 1.5rem;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-name { font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+    nav ul { display: flex; gap: 1.8rem; list-style: none; }
+    nav a { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    nav a:hover, nav a.active { color: var(--accent); font-weight: 600; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: linear-gradient(160deg, #e8f5e9 0%, #f2f8f2 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .page-header-inner { max-width: 860px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-title {
+      font-family: 'Lora', serif; font-size: 2rem; font-weight: 600;
+      letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.5rem;
+    }
+    .page-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .page-sub strong { color: var(--text-mid); }
+
+    /* FILTER TABS */
+    .filter-bar {
+      max-width: 860px; margin: 0 auto;
+      padding: 1.4rem 1.5rem 0;
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.35rem 0.9rem; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-muted);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--accent2); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* MAIN CONTENT */
+    main { max-width: 860px; margin: 0 auto; padding: 1.8rem 1.5rem 4rem; }
+
+    /* YEAR GROUP */
+    .year-group { margin-bottom: 2.8rem; }
+    .year-label {
+      font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 0.9rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .year-label::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent2); display: inline-block;
+    }
+    .pub-list { display: flex; flex-direction: column; gap: 0.85rem; }
+
+    /* PUB CARD */
+    .pub-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem 1.3rem;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+      display: flex; gap: 1.1rem;
+    }
+    .pub-card:hover {
+      box-shadow: 0 4px 18px rgba(45,122,45,0.1);
+      border-color: var(--accent2); transform: translateY(-1px);
+    }
+    .pub-card[data-hidden="true"] { display: none; }
+
+    /* teaser thumb */
+    .pub-thumb {
+      width: 80px; height: 60px; flex-shrink: 0;
+      border-radius: 7px; overflow: hidden;
+      background: linear-gradient(135deg, var(--bg2), var(--accent-lt));
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .pub-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .pub-body { flex: 1; min-width: 0; }
+    .pub-meta { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 0.45rem; }
+
+    .pub-badge {
+      display: inline-block; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.15rem 0.5rem; border-radius: 4px; border: 1px solid;
+    }
+    .badge-conf  { background: #e8f5e9; color: var(--accent); border-color: #c8e6c9; }
+    .badge-jour  { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+    .badge-arxiv { background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+    .badge-ws    { background: #f3e8ff; color: #7c3aed; border-color: #ddd6fe; }
+
+    .pub-if { font-size: 0.71rem; color: var(--text-muted); }
+
+    .pub-title {
+      font-size: 0.93rem; font-weight: 600; color: var(--text);
+      line-height: 1.45; margin-bottom: 0.35rem;
+    }
+    .pub-authors { font-size: 0.79rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .pub-authors strong { color: var(--text-mid); }
+    .pub-venue { font-size: 0.79rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.55rem; }
+    .pub-venue strong { color: var(--accent); font-style: normal; font-weight: 700; }
+
+    .pub-links { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      font-size: 0.72rem; font-weight: 600; padding: 0.18rem 0.55rem;
+      border-radius: 5px; text-decoration: none; border: 1px solid;
+      transition: all 0.15s;
+    }
+    .pl-page  { color: var(--accent); border-color: #c8e6c9; background: #f1f8f1; }
+    .pl-page:hover  { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pl-paper { color: #1565c0; border-color: #bbdefb; background: #f0f7ff; }
+    .pl-paper:hover { background: #1565c0; color: #fff; }
+    .pl-code  { color: #374151; border-color: #d1d5db; background: #f9fafb; }
+    .pl-code:hover  { background: #374151; color: #fff; border-color: #374151; }
+    .pl-arxiv { color: #b45309; border-color: #fde68a; background: #fffbeb; }
+    .pl-arxiv:hover { background: #b45309; color: #fff; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border); font-size: 0.78rem;
+      color: var(--text-muted); background: var(--bg2);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* FADE */
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .pub-thumb { display: none; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Jiho Choi</a>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="publications.html" class="active">Publications</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#awards">Awards</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="breadcrumb"><a href="index.html">Jiho Choi</a> &nbsp;/&nbsp; Publications</p>
+    <h1 class="page-title">Publications</h1>
+    <p class="page-sub">
+      <strong>11 papers</strong> &nbsp;·&nbsp; Conferences, Journals, Workshops &amp; Preprints
+      &nbsp;·&nbsp; † Equal contribution &nbsp;·&nbsp; * Corresponding author
+    </p>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="conf">Conference</button>
+  <button class="filter-btn" data-filter="jour">Journal</button>
+  <button class="filter-btn" data-filter="arxiv">Preprint</button>
+  <button class="filter-btn" data-filter="ws">Workshop</button>
+</div>
+
+<main>
+
+  <!-- 2026 -->
+  <div class="year-group fade-in" data-year="2026">
+    <div class="year-label">2026</div>
+    <div class="pub-list">
+
+      <div class="pub-card" data-type="conf">
+        <div class="pub-thumb">📡</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-conf">ICRA 2026</span>
+          </div>
+          <p class="pub-title">MS-rPPG: Multi-spectral State Space Model for Remote Photoplethysmography in Driver Monitoring Systems</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>IEEE International Conference on Robotics &amp; Automation (ICRA)</strong>, 2026</p>
+          <div class="pub-links">
+            <a href="ms-rppg/index.html" class="pub-link pl-page">🌿 Project Page</a>
+            <a href="https://github.com/ziiho08/MS-rPPG" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="year-group fade-in" data-year="2025">
+    <div class="year-label">2025</div>
+    <div class="pub-list">
+
+      <div class="pub-card" data-type="arxiv">
+        <div class="pub-thumb">🔄</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-arxiv">arXiv 2025</span>
+          </div>
+          <p class="pub-title">Periodic-MAE: Periodic Video Masked Autoencoder for rPPG Estimation</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>arXiv preprint</strong>, 2025</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2506.21855" class="pub-link pl-arxiv" target="_blank" rel="noopener">Preprint</a>
+            <a href="https://github.com/ziiho08/Periodic-MAE" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="ws">
+        <div class="pub-thumb">🚗</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-ws">CVPRW 2025</span>
+          </div>
+          <p class="pub-title">MMDrive: Multi-modal Remote Physiological Signal Measurement Dataset for Driver Status Monitoring</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>CVPR Workshop on ABAW (CVPRW)</strong>, 2025</p>
+          <div class="pub-links">
+            <a href="https://openaccess.thecvf.com/content/CVPR2025W/ABAW/html/Choi_MMDrive_Multi-modal_Remote_Physiological_Signal_Measurement_Dataset_for_Driver_Status_CVPRW_2025_paper.html" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+            <a href="https://github.com/ziiho08/MMDrive" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="jour">
+        <div class="pub-thumb">🐾</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-jour">Journal 2025</span>
+            <span class="pub-if">IF: 7.0 · JCR Top 2.3%</span>
+          </div>
+          <p class="pub-title">PFSH-Net: Parallel Frequency-Spatial Hybrid Network for Segmentation of Kidney Stones in Pre-contrast Computed Tomography Images of Dogs</p>
+          <p class="pub-authors"><strong>Jiho Choi†</strong>, Gyeongyeon Hwang†, Yewon Ji, Hakyoung Yoon, Sang Jun Lee* &nbsp;<small>(† equal contribution)</small></p>
+          <p class="pub-venue"><strong>Computers in Biology and Medicine</strong>, 2025</p>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0010482524016949" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+            <a href="https://github.com/gyeongyeon-Hwang/veterinary-kidney-segmentation" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="year-group fade-in" data-year="2024">
+    <div class="year-label">2024</div>
+    <div class="pub-list">
+
+      <div class="pub-card" data-type="jour">
+        <div class="pub-thumb">🚙</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-jour">Journal 2024</span>
+            <span class="pub-if">IF: 3.4</span>
+          </div>
+          <p class="pub-title">Neural Radiance Fields for Fisheye Driving Scenes Using Edge-Aware Integrated Depth Supervision</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>Sensors</strong>, 2024</p>
+          <div class="pub-links">
+            <a href="https://www.mdpi.com/1424-8220/24/21/6790" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+            <a href="https://github.com/ziiho08/Edge-aware-Integrated-Depth-Supervision" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="ws">
+        <div class="pub-thumb">👁️</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-ws">IJCAIW 2024</span>
+          </div>
+          <p class="pub-title">DINO-rPPG: Remote Photoplethysmography Measurement using Facial Representation from DINO Guidance</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>IJCAI Workshop on RePSS (IJCAIW)</strong>, 2024</p>
+          <div class="pub-links">
+            <a href="https://ceur-ws.org/Vol-3750/paper9.pdf" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="ws">
+        <div class="pub-thumb">🌐</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-ws">CVPRW 2024</span>
+          </div>
+          <p class="pub-title">DiCo-NeRF: Difference of Cosine Similarity for Neural Rendering of Fisheye Driving Scenes</p>
+          <p class="pub-authors"><strong>Jiho Choi†</strong>, Gyutae Hwang†, Sang Jun Lee* &nbsp;<small>(† equal contribution)</small></p>
+          <p class="pub-venue"><strong>CVPR Workshop on NRI (CVPRW)</strong>, 2024</p>
+          <div class="pub-links">
+            <a href="https://openaccess.thecvf.com/content/CVPR2024W/NRI/html/Choi_DiCo-NeRF_Difference_of_Cosine_Similarity_for_Neural_Rendering_of_Fisheye_CVPRW_2024_paper.html" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+            <a href="https://github.com/ziiho08/DiCoNeRF" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="year-group fade-in" data-year="2023">
+    <div class="year-label">2023</div>
+    <div class="pub-list">
+
+      <div class="pub-card" data-type="jour">
+        <div class="pub-thumb">🐟</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-jour">Journal 2023</span>
+            <span class="pub-if">IF: 3.9</span>
+          </div>
+          <p class="pub-title">Monocular Depth Estimation from a Fisheye Camera based on Knowledge Distillation</p>
+          <p class="pub-authors">Eunjin Son, <strong>Jiho Choi</strong>, Jimin Song, Yongsik Jin, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>Sensors</strong>, 2023</p>
+          <div class="pub-links">
+            <a href="https://www.mdpi.com/1424-8220/23/24/9866" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="jour">
+        <div class="pub-thumb">💓</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-jour">Journal 2023</span>
+            <span class="pub-if">IF: 8.5 · JCR Top 6.4%</span>
+          </div>
+          <p class="pub-title">Weighted Knowledge Distillation of Attention-LRCN for Recognizing Affective States from PPG Signals</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Gyutae Hwang, Jun Seong Lee, Moonwook Ryu, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>Expert Systems with Applications</strong>, 2023</p>
+          <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0957417423013854" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+            <a href="https://github.com/ziiho08/Attention-LRCN" class="pub-link pl-code" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2022 -->
+  <div class="year-group fade-in" data-year="2022">
+    <div class="year-label">2022</div>
+    <div class="pub-list">
+
+      <div class="pub-card" data-type="jour">
+        <div class="pub-thumb">⚡</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-jour">Journal 2022</span>
+            <span class="pub-if">IF: 5.349</span>
+          </div>
+          <p class="pub-title">Weakly Supervised Learning for Transmission Line Detection using Unpaired Image-To-Image Translation</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>Remote Sensing</strong>, 2022</p>
+          <div class="pub-links">
+            <a href="https://www.mdpi.com/2072-4292/14/14/3421" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card" data-type="conf">
+        <div class="pub-thumb">😌</div>
+        <div class="pub-body">
+          <div class="pub-meta">
+            <span class="pub-badge badge-conf">MeMeA 2022</span>
+          </div>
+          <p class="pub-title">Attention-LRCN: Long-term Recurrent Convolutional Network for Stress Detection from Photoplethysmography</p>
+          <p class="pub-authors"><strong>Jiho Choi</strong>, Jun Seong Lee, Moonwook Ryu, Gyutae Hwang, Gyeongyeon Hwang, Sang Jun Lee*</p>
+          <p class="pub-venue"><strong>IEEE International Symposium on Medical Measurements and Applications (MeMeA)</strong>, 2022</p>
+          <div class="pub-links">
+            <a href="https://ieeexplore.ieee.org/abstract/document/9856417" class="pub-link pl-paper" target="_blank" rel="noopener">Paper</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 Jiho Choi · Jeonbuk National University</p>
+  <p style="margin-top:0.3rem;">
+    <a href="https://github.com/ziiho08" target="_blank">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://scholar.google.com/citations?user=LIQ3ODkAAAAJ&hl=ko" target="_blank">Google Scholar</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries =>
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.pub-card').forEach(card => {
+        const show = f === 'all' || card.dataset.type === f;
+        card.style.display = show ? 'flex' : 'none';
+      });
+      // hide empty year groups
+      document.querySelectorAll('.year-group').forEach(g => {
+        const visible = [...g.querySelectorAll('.pub-card')].some(c => c.style.display !== 'none');
+        g.style.display = visible ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
